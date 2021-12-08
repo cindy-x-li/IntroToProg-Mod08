@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------ #
 # Title: Assignment 08
-# Description: Working with classes
+# Description: Working with classes by creating product objects to append to a list
 
 # ChangeLog (Who,When,What):
 # RRoot,1.1.2030,Created started script
