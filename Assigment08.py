@@ -60,9 +60,17 @@ class Product(object):
             raise Exception("Blank entries are not allowed")
     # Methods
     def __str__(self):
+        """ Format __str__ method
+
+        :return: formatted (string)
+        """
         return self.__name + ", " + str(self.__price)
 
     def to_string(self):
+        """ Same as __str__ method
+
+        :return: formatted (string)
+        """
         return self.__str__()
 # Data -------------------------------------------------------------------- #
 
