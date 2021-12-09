@@ -184,9 +184,9 @@ class IO:
             product_object.name = str(input('Enter product name: ')).title().strip()
             product_object.price = float(input('Enter ' + product_object.name + ' cost: '))
             list_of_prod_obj.append(product_object)
-        # except ValueError:
-        #     print("Entry error")
-        #     print('Product\'s price must be a number')
+        except ValueError:
+            print("Entry error")
+            print('Product\'s price must be a number')
         except Exception as e:
             print("Entry error")
             print(e)
