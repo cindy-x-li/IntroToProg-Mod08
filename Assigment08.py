@@ -162,7 +162,7 @@ class IO:
     def print_current_products_in_list(list_of_prod_obj):
         """ Shows the current items in the list of product objects
 
-        :param list_of_rows: (list) of items you want to display
+        :param list_of_prod_obj: (list) of items you want to display
         :return: nothing
         """
         print("******* Products: *******")
