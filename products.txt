@@ -2,3 +2,4 @@ Airpods, 200.0
 Magsafe Charger, 30.0
 Usb-C Wall Charger, 20.0
 Apple Watch, 750.0
+Macbook, 1200.0

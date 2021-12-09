@@ -20,6 +20,8 @@ class Product(object):
         name: (string) with the products' name
         price: (float) with the products' standard price
     methods:
+        __str__: (string) with product name and price formatted
+        to_string: (string) with product name and price formatted
     changelog: (When,Who,What)
         RRoot,1.1.2030,Created Class
         CLi,12.5.2021,Modified code to complete assignment 8
@@ -151,8 +153,8 @@ class IO:
     @staticmethod
     def input_products_to_list(product_object, list_of_prod_obj):
         try:
-            product_object.name = str(input('\nEnter the name of product: ')).title().strip()
-            product_object.price = float(input('Enter cost of ' + product_object.name + ': '))
+            product_object.name = str(input('Enter product name: ')).title().strip()
+            product_object.price = float(input('Enter ' + product_object.name + ' cost: '))
             list_of_prod_obj.append(product_object)
         except ValueError:
             print("Entry error")
