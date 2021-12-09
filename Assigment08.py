@@ -27,13 +27,13 @@ class Product(object):
         CLi,12.5.2021,Modified code to complete assignment 8
     """
     def __init__(self, name, price):
-        self.__name = name
-        self.__price = price
+        self.name = name
+        self.price = price
     # Properties
     # Property for product name
     @property
     def name(self):
-        return str(self.__name).title()
+        return str(self.__name.title())
     @name.setter
     def name(self, value):
         if not str(value).isnumeric():
@@ -81,25 +81,34 @@ class FileProcessor:
     """
     # Read data from a file
     @staticmethod
-    def read_file_data_to_string(file_name, list_of_prod_obj):
+    def read_data_from_file(file_name, list_of_prod_obj):
+        """ Converts lines within file into objects to append to list
+
+        :param file_name: (string) with text file name
+        :param list_of_prod_obj: (list) of product objects
+        :return: modified (list) of product objects
+        """
         list_of_prod_obj.clear()  # clear current data
         with open(file_name, 'r') as file:
             for line in file:
-                product_object = Product('', 0)
                 name, price = line.split(', ')
-                product_object.name = name.strip()
-                product_object.price = price.strip()
                 # print(product_object.to_string())  # testing if each line was converted to an object
-                list_of_prod_obj.append(product_object)
+                list_of_prod_obj.append(Product(name, price.strip()))
             return list_of_prod_obj, 'Success'
 
     # Save data to a file
     @staticmethod
     def save_data_to_file(file_name, list_of_prod_obj):
+        """ Saves loaded data and newly inputted data into file
+
+        :param file_name: (string) with text file name
+        :param list_of_prod_obj: (list) of product objects
+        :return: nothing
+        """
         with open(file_name, 'w') as file:
             for item in list_of_prod_obj:
                 file.write(item.to_string() + '\n')
-        return list_of_prod_obj, 'Success'
+        return 'Success'
 
 # Processing  ------------------------------------------------------------- #
 
@@ -124,6 +133,10 @@ class IO:
     # Shows menu to user
     @staticmethod
     def print_menu_options():
+        """Gets the menu choice from a user
+
+        :return: (string) with user's menu selection
+        """
         print('''
               Menu of Options
               0) Exit Program
@@ -136,6 +149,10 @@ class IO:
     # Get user's choice
     @staticmethod
     def input_menu_choice():
+        """Gets the menu choice from a user
+
+        :return: (string) with user's menu selection
+        """
         choice = str(input('Which option would you like to perform? [0 to 3] - ')).strip()
         print()  # Add an extra line for looks
         return choice
@@ -143,6 +160,11 @@ class IO:
     # Show the current data from the file to user
     @staticmethod
     def print_current_products_in_list(list_of_prod_obj):
+        """ Shows the current items in the list of product objects
+
+        :param list_of_rows: (list) of items you want to display
+        :return: nothing
+        """
         print("******* Products: *******")
         for item in list_of_prod_obj:
             print(item.name + ' (' + str(item.price) + ')')
@@ -152,13 +174,19 @@ class IO:
     # Get product data from user
     @staticmethod
     def input_products_to_list(product_object, list_of_prod_obj):
+        """User inputs product name and its cost to create a object
+
+        :param product_object: (object) instance of a product
+        :param list_of_prod_obj: (list) with product objects
+        :return: modified (list) with newly added product object
+        """
         try:
             product_object.name = str(input('Enter product name: ')).title().strip()
             product_object.price = float(input('Enter ' + product_object.name + ' cost: '))
             list_of_prod_obj.append(product_object)
-        except ValueError:
-            print("Entry error")
-            print('Product\'s price must be a number')
+        # except ValueError:
+        #     print("Entry error")
+        #     print('Product\'s price must be a number')
         except Exception as e:
             print("Entry error")
             print(e)
@@ -176,7 +204,7 @@ class IO:
 
 # Main Body of Script  ---------------------------------------------------- #
 # Load data from file into a list of product objects when script starts
-product_objects_lst, status_str = FileProcessor.read_file_data_to_string(file_name=file_name_str, list_of_prod_obj=product_objects_lst)  # WORKING!
+product_objects_lst, status_str = FileProcessor.read_data_from_file(file_name=file_name_str, list_of_prod_obj=product_objects_lst)
 # print(status_str)  # testing if method ran
 # print(product_objects_lst)  # testing if list contains products objects
 
@@ -194,14 +222,14 @@ while True:
 
     # Let user add data to the list of product objects
     elif choice_str.strip() == '2':
-        product = Product('', 0)
+        product = Product('empty', 0)
         product_objects_lst, status_str = IO.input_products_to_list(product_object=product, list_of_prod_obj=product_objects_lst)
         IO.input_press_to_continue()
         continue
 
     # let user save current data to file and exit program
     elif choice_str.strip() == '3':
-        product_objects_lst, status_str = FileProcessor.save_data_to_file(file_name=file_name_str, list_of_prod_obj=product_objects_lst) #WORKING!!
+        FileProcessor.save_data_to_file(file_name=file_name_str, list_of_prod_obj=product_objects_lst)
         IO.input_press_to_continue()
         print('Goodbye!')
         break
